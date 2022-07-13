@@ -28,4 +28,6 @@ rm v1.0.0.tar.gz
 rm -rf Bio-Deago-1.0.0
 conda deactivate
 
+#check if the markdown templates need to be copied to the per5/lib...
+
 set +eu
