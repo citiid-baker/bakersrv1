@@ -19,7 +19,15 @@ conda activate ncbi-genome-download-0.3.1
 ncbi-genome-download -s refseq -F fasta,gff -l complete,chromosome -o /home/software/refs -H -P -p THREADS -r 3 -m /home/software/viral_references.tsv viruses
 
 # Download a limited set of bacerial genomes
-GENOMES={Acinetobacter,Aspergillus,Aliivibrio,Bacteroides,Bordetella,Burkholderia,Candida,Chlamydia,Campylobacter,Citrobacter,Clostridium,[Clostridium],Corynebacterium,Coxiella,Elizabethkingia,[Enterobacter],Enterobacter,Enterobacteriaceae,Enterococcus,Escherichia,Haemophilus,Helicobacter,Klebsiella,Legionella,Leptospira,Moraxella,Morganella,Mycobacterium,Neisseria,Pneumocystis,Proteus,Pseudomonas,Salmonella,Serratia,Shigella,Staphylococcus,Stenotrophomonas,Streptococcus}
+genomes=("Acinetobacte" "Aspergillus" "Aliivibrio" "Bacteroides" "Bordetella" "Burkholderia" " Candida" "Chlamydia" "Campylobacter" "Citrobacter" "Clostridium" "[Clostridium]" "Corynebacterium" "Coxiella" "Elizabethkingia" "[Enterobacter]" "Enterobacte" "Enterobacteriaceae" "Enterococcus" "Escherichia" "Haemophilus" "Helicobacter" "Klebsiella" "Legionella" "Leptospira" "Moraxella" "Morganella" "Mycobacterium" "Neisseria" "Pneumocystis" "Proteus" "Pseudomonas" "Salmonella" "Serratia" "Shigella" "Staphylococcus" "Stenotrophomonas" "Streptococcus")
+for i in "${genomes[@]}"
+do
+   : 
+   # do whatever on "$i" here
+   print $i
+   ncbi-genome-download -s refseq -F fasta,gff -l complete,chromosome -o here -H -P -p $THREADS -r 3 -m $i_references.tsv -g $i
+done
+
 for each genome in GENOMES
 ncbi-genome-download -s refseq -F fasta,gff -l complete,chromosome -o here -H -P -p $THREADS -r 3 -m bacteria_references.tsv bacteria
 
