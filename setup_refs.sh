@@ -51,15 +51,69 @@ do
 done
 
 # Fix reference names with non-standard characters e.g. (),+
-# TODO
+# TODO?
 
 # Join all the tables into one table
 cat ${LOCATION}/*.tsv > ${LOCATION}/references.tsv
 
-#create a reffind script ?
-# TODO
-echo "This is the reffind script" > reffind.sh
-grep "S74" Proteus_references.tsv |  awk -F"\t" 'BEGIN {print "\"Species\",\"Reference File\""} {print $10" "$11","$23}'
+# Create a reffind script
+cat > reffind.sh <<-EOF
+#!/bin/bash
+#
+# Author: Jacqui Keane <drjkeane at gmail.com>
+#
+# Usage: reffind.sh [-h] -s search_term
+#
+
+set -eu
+
+function help
+{
+   # Display Help
+   script=$(basename $0)
+   echo 
+   echo "usage: "$script" [-h] -s search_term
+   echo
+   echo "Searches for the location of reference genome files that match the supplied search term"
+   echo
+   echo "optional arguments:"
+   echo "  -h, --help          	show this help message and exit"
+   echo
+   echo "required arguments:"
+   echo "-s search_term reference genome files that match the supplied search term"
+   echo
+}
+
+# Check number of input parameters 
+
+NAG=$#
+
+if [ $NAG -ne 1 ] && [ $NAG -ne 2]
+then
+  help
+  echo "Please provide the correct number of input arguments"
+  echo
+  exit;
+fi
+
+# Get the options
+while getopts "hs:" option; do
+   case $option in
+      h) # Display help
+         help
+         exit;;
+      i) # Search term
+         TERM=$OPTARGS;;
+     \?) # Invalid option
+         help
+         echo "Error: Invalid arguments"
+         exit;;
+   esac
+done
+
+grep $TERM references.tsv | awk -F"\t" 'BEGIN {print "\"Species\",\"Reference File\""} {print $10" "$11","$23}'
+
+EOF
 
 mv reffind.sh /home/software/bin
 chmod 775 /home/software/bin/reffind.sh
