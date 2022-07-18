@@ -19,15 +19,15 @@ function help
    echo "Downloads high quality reference genomes from refseq and stores then in the specified output directory"
    echo
    echo "optional arguments:"
-   echo "-h, --help		show this help message and exit"
+   echo "-h             show this help message and exit"
    echo
    echo "required arguments:"
-   echo "-o out_dir 		location to store the references"
-   echo "-t threads 		number of threads"
+   echo "-o out_dir     location to store the references"
+   echo "-t threads     number of threads"
    echo
 }
 
-#Check number of input parameters
+# Check number of input parameters
 NAG=$#
 if [ $NAG -ne 1 ] && [ $NAG -ne 4 ]
 then
