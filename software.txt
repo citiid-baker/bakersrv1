@@ -161,3 +161,4 @@ r-4.1.3,r-base=4.1.3
 cialign-1.0.18,cialign=1.0.18
 breakdancer-1.4.5,breakdancer=1.4.5
 mugsy-1.2.3,mugsy=1.2.3
+interproscan-5.55,interproscan=5.55
